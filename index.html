@@ -124,7 +124,7 @@
             margin: 20px auto 0;
         }
 
-        /* Box nhập link OneDrive */
+        /* Box hiển thị link OneDrive */
         .link-box {
             background: rgba(255, 255, 255, 0.5);
             border-radius: 24px;
@@ -157,86 +157,56 @@
             font-size: 18px;
         }
 
-        .input-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .input-group input {
-            flex: 1;
-            min-width: 200px;
-            padding: 16px 20px;
-            border: 2px solid rgba(0, 0, 0, 0.06);
-            border-radius: 16px;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
+        .link-display {
             background: white;
-            transition: all 0.3s ease;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 2px solid rgba(0, 120, 212, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            word-break: break-all;
+        }
+
+        .link-display i {
+            color: #0078d4;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .link-display .link-text {
+            flex: 1;
+            font-size: 15px;
             color: #0b1b33;
-            outline: none;
+            font-weight: 500;
+            line-height: 1.5;
         }
 
-        .input-group input:focus {
-            border-color: #0078d4;
-            box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.1);
-        }
-
-        .input-group input::placeholder {
+        .link-display .link-text.empty {
             color: #a0b8d0;
             font-weight: 400;
+            font-style: italic;
         }
 
-        .input-group .btn-save {
-            padding: 16px 28px;
-            background: linear-gradient(135deg, #2d7aff, #4a9eff);
-            color: white;
+        .link-display .btn-copy {
+            background: none;
             border: none;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
+            color: #4a6a8a;
             cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            box-shadow: 0 4px 16px rgba(45, 122, 255, 0.2);
-        }
-
-        .input-group .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(45, 122, 255, 0.3);
-        }
-
-        .input-group .btn-save:active {
-            transform: scale(0.97);
-        }
-
-        .input-group .btn-save i {
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
             font-size: 18px;
+            flex-shrink: 0;
         }
 
-        /* Trạng thái lưu thành công */
-        .save-status {
-            margin-top: 14px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #2d7aff;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            height: 24px;
+        .link-display .btn-copy:hover {
+            background: rgba(0, 120, 212, 0.08);
+            color: #0078d4;
         }
 
-        .save-status.show {
-            opacity: 1;
-        }
-
-        .save-status i {
-            font-size: 16px;
+        .link-display .btn-copy.copied {
+            color: #2ecc71;
         }
 
         /* Nút mở OneDrive chính */
@@ -273,37 +243,26 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
-        .onedrive-btn:hover:not(.disabled) {
+        .onedrive-btn:hover {
             transform: scale(1.02) translateY(-3px);
             box-shadow: 0 20px 48px rgba(0, 120, 212, 0.40);
             background: linear-gradient(135deg, #1084e0, #0078d4);
         }
 
-        .onedrive-btn:active:not(.disabled) {
+        .onedrive-btn:active {
             transform: scale(0.98);
-        }
-
-        .onedrive-btn.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            box-shadow: none;
         }
 
         .onedrive-btn .badge {
             position: absolute;
             top: -10px;
             right: -10px;
-            background: #ff6b6b;
+            background: #2ecc71;
             color: white;
             font-size: 11px;
             font-weight: 700;
             padding: 4px 10px;
             border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-        }
-
-        .onedrive-btn .badge.ready {
-            background: #2ecc71;
             box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
         }
 
@@ -349,6 +308,40 @@
             text-decoration: underline;
         }
 
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0b1b33;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast i {
+            font-size: 20px;
+        }
+
+        .toast.success i {
+            color: #2ecc71;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .container {
@@ -358,21 +351,6 @@
 
             .header h1 {
                 font-size: 26px;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .input-group input {
-                min-width: unset;
-                width: 100%;
-            }
-
-            .input-group .btn-save {
-                width: 100%;
-                justify-content: center;
-                padding: 16px;
             }
 
             .onedrive-btn {
@@ -387,6 +365,10 @@
 
             .link-box {
                 padding: 20px 16px 24px;
+            }
+
+            .link-display {
+                flex-wrap: wrap;
             }
         }
 
@@ -417,28 +399,18 @@
             <div class="divider"></div>
         </div>
 
-        <!-- Box nhập link OneDrive -->
+        <!-- Box hiển thị link OneDrive -->
         <div class="link-box">
             <div class="label">
                 <i class="fas fa-link"></i>
-                <span>Dán link OneDrive</span>
+                <span>Link OneDrive đang sử dụng</span>
             </div>
-            <div class="input-group">
-                <input 
-                    type="url" 
-                    id="onedriveInput" 
-                    placeholder="https://onedrive.live.com/..."
-                    spellcheck="false"
-                    autocomplete="url"
-                >
-                <button class="btn-save" id="saveBtn">
-                    <i class="fas fa-save"></i>
-                    <span>Lưu &amp; Chia sẻ link</span>
+            <div class="link-display">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span class="link-text" id="linkDisplay">Đang tải...</span>
+                <button class="btn-copy" id="copyBtn" title="Copy link">
+                    <i class="fas fa-copy"></i>
                 </button>
-            </div>
-            <div class="save-status" id="saveStatus">
-                <i class="fas fa-check-circle"></i>
-                <span>Đã lưu link! Copy URL trang web để chia sẻ</span>
             </div>
         </div>
 
@@ -446,17 +418,17 @@
         <div class="onedrive-btn-wrapper">
             <a href="#" 
                id="openBtn" 
-               class="onedrive-btn disabled" 
+               class="onedrive-btn" 
                target="_blank" 
                rel="noopener noreferrer">
                 <i class="fab fa-microsoft"></i>
                 <span>Mở kho ứng dụng</span>
                 <i class="fas fa-arrow-right" style="font-size: 18px;"></i>
-                <span class="badge" id="badge">Chưa có link</span>
+                <span class="badge">Sẵn sàng</span>
             </a>
             <div class="link-hint">
                 <i class="fas fa-info-circle"></i>
-                <span>Dán link OneDrive và nhấn "Lưu" để tạo link chia sẻ</span>
+                <span>Bấm nút để mở kho ứng dụng trên OneDrive</span>
             </div>
         </div>
 
@@ -468,48 +440,39 @@
         </div>
     </div>
 
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Đã copy link!</span>
+    </div>
+
     <script>
         (function() {
-            const input = document.getElementById('onedriveInput');
-            const saveBtn = document.getElementById('saveBtn');
+            // =============================================
+            // 🔥 CHỈ CẦN THAY LINK ONEDRIVE CỦA BẠN VÀO ĐÂY
+            // =============================================
+            const ONEDRIVE_LINK = 'https://vacxinvietnam-my.sharepoint.com/:f:/g/personal/tripm_vnvc_vn/IgDKx2TJymE5R5FEWBjqmPa2Aei1Ej9Sr1NaU9a2vPoWKe0?e=8Tm3gl';
+            // Ví dụ: 'https://onedrive.live.com/?id=123456789&cid=abcdef123456'
+            // =============================================
+
+            const linkDisplay = document.getElementById('linkDisplay');
             const openBtn = document.getElementById('openBtn');
-            const saveStatus = document.getElementById('saveStatus');
-            const badge = document.getElementById('badge');
+            const copyBtn = document.getElementById('copyBtn');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
 
-            // Hàm lấy link từ URL (query string)
-            function getLinkFromURL() {
-                const params = new URLSearchParams(window.location.search);
-                return params.get('onedrive');
+            // Hàm hiển thị toast
+            function showToast(message, isSuccess = true) {
+                toastMessage.textContent = message;
+                toast.className = 'toast ' + (isSuccess ? 'success' : '');
+                toast.classList.add('show');
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
             }
 
-            // Hàm cập nhật URL với link
-            function updateURL(link) {
-                if (!link) return;
-                const url = new URL(window.location);
-                url.searchParams.set('onedrive', link);
-                window.history.pushState({}, '', url);
-            }
-
-            // Hàm cập nhật trạng thái nút mở
-            function updateOpenButton(link) {
-                if (link && link.trim() !== '' && isValidUrl(link)) {
-                    openBtn.href = link;
-                    openBtn.classList.remove('disabled');
-                    badge.textContent = 'Sẵn sàng';
-                    badge.className = 'badge ready';
-                    openBtn.style.opacity = '1';
-                    return true;
-                } else {
-                    openBtn.href = '#';
-                    openBtn.classList.add('disabled');
-                    badge.textContent = 'Chưa có link';
-                    badge.className = 'badge';
-                    openBtn.style.opacity = '0.5';
-                    return false;
-                }
-            }
-
-            // Kiểm tra URL hợp lệ
+            // Hàm kiểm tra URL hợp lệ
             function isValidUrl(string) {
                 try {
                     const url = new URL(string);
@@ -519,109 +482,78 @@
                 }
             }
 
-            // Hiển thị trạng thái lưu thành công
-            function showSaveStatus(show) {
-                if (show) {
-                    saveStatus.classList.add('show');
-                    setTimeout(() => {
-                        saveStatus.classList.remove('show');
-                    }, 4000);
-                } else {
-                    saveStatus.classList.remove('show');
-                }
-            }
-
-            // Lưu link và cập nhật URL
-            function saveLink() {
-                const link = input.value.trim();
-                
-                if (!link) {
-                    alert('⚠️ Vui lòng dán link OneDrive vào ô trống!');
-                    return;
-                }
-
-                if (!isValidUrl(link)) {
-                    alert('❌ Link không hợp lệ. Vui lòng dán đúng link OneDrive (bắt đầu bằng http:// hoặc https://)');
-                    return;
-                }
-
-                // Cập nhật URL với link
-                updateURL(link);
-                
-                // Cập nhật nút mở
-                updateOpenButton(link);
-                
-                // Hiển thị thông báo thành công
-                showSaveStatus(true);
-                
-                // Đánh dấu input đã lưu
-                input.style.borderColor = '#2ecc71';
-                setTimeout(() => {
-                    input.style.borderColor = '';
-                }, 2000);
-
-                // Copy link để chia sẻ
-                const fullURL = window.location.href;
-                navigator.clipboard.writeText(fullURL).then(() => {
-                    // Hiển thị thông báo đã copy
-                    const statusText = saveStatus.querySelector('span');
-                    statusText.textContent = '✅ Đã lưu & copy link! Dán để chia sẻ';
-                    setTimeout(() => {
-                        statusText.textContent = 'Đã lưu link! Copy URL trang web để chia sẻ';
-                    }, 3000);
-                }).catch(() => {
-                    // Nếu không copy được (trình duyệt không hỗ trợ)
-                    const statusText = saveStatus.querySelector('span');
-                    statusText.textContent = '✅ Đã lưu! Copy URL trên thanh địa chỉ để chia sẻ';
-                    setTimeout(() => {
-                        statusText.textContent = 'Đã lưu link! Copy URL trang web để chia sẻ';
-                    }, 3000);
-                });
-            }
-
-            // Tải link từ URL khi trang load
-            function loadLinkFromURL() {
-                const link = getLinkFromURL();
+            // Hàm cập nhật giao diện với link
+            function updateUI(link) {
                 if (link && isValidUrl(link)) {
-                    input.value = link;
-                    updateOpenButton(link);
-                    console.log('✅ Đã tải link OneDrive từ URL');
-                    return true;
+                    // Hiển thị link
+                    linkDisplay.textContent = link;
+                    linkDisplay.className = 'link-text';
+                    
+                    // Cập nhật nút mở
+                    openBtn.href = link;
+                    openBtn.style.opacity = '1';
+                    
+                    // Thêm badge sẵn sàng
+                    const badge = openBtn.querySelector('.badge');
+                    if (badge) badge.textContent = 'Sẵn sàng';
                 } else {
-                    updateOpenButton('');
-                    return false;
+                    linkDisplay.textContent = '⚠️ Chưa cấu hình link OneDrive!';
+                    linkDisplay.className = 'link-text empty';
+                    openBtn.href = '#';
+                    openBtn.style.opacity = '0.5';
+                    const badge = openBtn.querySelector('.badge');
+                    if (badge) badge.textContent = 'Lỗi';
                 }
             }
 
-            // Xử lý sự kiện nhấn Enter trong input
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    saveBtn.click();
+            // Xử lý copy link
+            copyBtn.addEventListener('click', function() {
+                const link = linkDisplay.textContent;
+                if (!link || link === 'Đang tải...' || link.includes('Chưa cấu hình')) {
+                    showToast('❌ Không có link để copy!', false);
+                    return;
                 }
+
+                navigator.clipboard.writeText(link).then(() => {
+                    showToast('✅ Đã copy link OneDrive!');
+                    // Hiệu ứng nút copy
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback: copy bằng cách tạo input tạm
+                    const tempInput = document.createElement('input');
+                    tempInput.value = link;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    showToast('✅ Đã copy link OneDrive!');
+                });
             });
 
-            // Xử lý sự kiện click nút Lưu
-            saveBtn.addEventListener('click', saveLink);
-
-            // Xử lý click nút Mở (kiểm tra nếu chưa có link)
+            // Xử lý click nút mở (kiểm tra nếu link lỗi)
             openBtn.addEventListener('click', function(e) {
-                if (this.classList.contains('disabled')) {
+                if (this.href === '#' || this.style.opacity === '0.5') {
                     e.preventDefault();
-                    alert('⚠️ Vui lòng dán link OneDrive và nhấn "Lưu & Chia sẻ link" trước khi mở!');
+                    showToast('⚠️ Link OneDrive chưa được cấu hình!', false);
                 }
             });
 
-            // Load link từ URL khi trang load
-            const hasLink = loadLinkFromURL();
+            // Khởi tạo giao diện với link đã cấu hình
+            updateUI(ONEDRIVE_LINK);
 
-            // Nếu có link, tự động kích hoạt nút
-            if (hasLink) {
-                console.log('🚀 Link OneDrive đã được tải từ URL');
+            // Kiểm tra nếu link mặc định chưa được thay đổi
+            if (ONEDRIVE_LINK === 'https://onedrive.live.com/?id=YOUR_FOLDER_ID&cid=YOUR_CID') {
+                console.warn('⚠️ Bạn chưa thay link OneDrive! Hãy sửa biến ONEDRIVE_LINK trong code.');
+                linkDisplay.textContent = '⚠️ Vui lòng cấu hình link OneDrive trong code!';
+                linkDisplay.className = 'link-text empty';
+            } else {
+                console.log('✅ Kho ứng dụng đã sẵn sàng với link OneDrive!');
             }
 
-            console.log('🚀 Kho ứng dụng đã sẵn sàng!');
-            console.log('💡 Dán link OneDrive và nhấn "Lưu" để tạo link chia sẻ.');
+            console.log('🚀 Trang đã tải xong!');
         })();
     </script>
 
