@@ -1,5 +1,445 @@
 <!DOCTYPE html>
-<html>
-<head><title>Trang web của Tripm</title></head>
-<body><h1>Chào mừng đến với GitHub Pages của tôi!</h1></body>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho ứng dụng của tôi</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            /* Tạo hiệu ứng nền động nhẹ */
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hiệu ứng các khối màu nền mờ */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 48px;
+            padding: 48px 40px 56px;
+            box-shadow: 
+                0 20px 60px rgba(0, 20, 40, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.02),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 32px 80px rgba(0, 20, 40, 0.12);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avatar-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2d7aff, #4a9eff);
+            border-radius: 28px;
+            color: white;
+            font-size: 36px;
+            box-shadow: 0 12px 28px rgba(45, 122, 255, 0.25);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar-icon:hover {
+            transform: scale(1.04) rotate(-2deg);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0b1b33;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .header .subhead {
+            font-size: 18px;
+            font-weight: 400;
+            color: #3b5a7a;
+            opacity: 0.8;
+            letter-spacing: 0.01em;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2d7aff, #6ab0ff);
+            border-radius: 4px;
+            margin: 20px auto 0;
+        }
+
+        /* Nội dung chính - Kho ứng dụng */
+        .app-section {
+            margin: 40px 0 32px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 32px;
+            padding: 32px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            transition: background 0.3s ease;
+        }
+
+        .app-section:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .app-section .label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #2d5a8a;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+
+        .app-section .label i {
+            font-size: 18px;
+        }
+
+        .app-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .app-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 18px 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .app-item:hover {
+            transform: translateX(6px);
+            border-color: #2d7aff30;
+            box-shadow: 0 8px 24px rgba(45, 122, 255, 0.10);
+            background: #ffffff;
+        }
+
+        .app-item .app-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .app-item .app-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #f0f7ff, #e6f0fa);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d7aff;
+            font-size: 24px;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .app-item:hover .app-icon {
+            background: linear-gradient(135deg, #2d7aff, #4a9eff);
+            color: white;
+        }
+
+        .app-item .app-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #0b1b33;
+        }
+
+        .app-item .app-desc {
+            font-size: 14px;
+            color: #4a6a8a;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        .app-item .app-arrow {
+            color: #a0b8d0;
+            font-size: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .app-item:hover .app-arrow {
+            transform: translateX(6px);
+            color: #2d7aff;
+        }
+
+        /* Nút OneDrive nổi bật */
+        .onedrive-btn-wrapper {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .onedrive-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+            padding: 18px 42px;
+            border-radius: 60px;
+            border: none;
+            box-shadow: 0 12px 32px rgba(0, 120, 212, 0.30);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            width: 100%;
+            max-width: 380px;
+            letter-spacing: 0.01em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .onedrive-btn i {
+            font-size: 28px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .onedrive-btn:hover {
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 20px 48px rgba(0, 120, 212, 0.40);
+            background: linear-gradient(135deg, #1084e0, #0078d4);
+        }
+
+        .onedrive-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #5b7b9b;
+            opacity: 0.6;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            padding-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: #2d5a8a;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            color: #0078d4;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .container {
+                padding: 32px 20px 40px;
+                border-radius: 32px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .app-item {
+                padding: 14px 18px;
+                flex-wrap: wrap;
+            }
+
+            .app-item .app-info {
+                gap: 12px;
+            }
+
+            .app-item .app-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .app-item .app-name {
+                font-size: 16px;
+            }
+
+            .onedrive-btn {
+                font-size: 18px;
+                padding: 16px 28px;
+                gap: 12px;
+            }
+
+            .onedrive-btn i {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .app-item .app-desc {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar-icon">
+                <i class="fas fa-cloud"></i>
+            </div>
+            <h1>Kho ứng dụng</h1>
+            <p class="subhead">Tất cả công cụ bạn cần, chỉ một cú nhấp</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Danh sách ứng dụng (mang tính minh họa) -->
+        <div class="app-section">
+            <div class="label">
+                <i class="fas fa-th-large"></i>
+                <span>Ứng dụng nổi bật</span>
+            </div>
+            <div class="app-grid">
+                <!-- Ứng dụng 1 (giả lập) -->
+                <a href="#" class="app-item" style="pointer-events: none; opacity: 0.7;">
+                    <div class="app-info">
+                        <div class="app-icon"><i class="fas fa-palette"></i></div>
+                        <div>
+                            <div class="app-name">Design Tool</div>
+                            <div class="app-desc">Thiết kế đồ họa</div>
+                        </div>
+                    </div>
+                    <div class="app-arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+                <!-- Ứng dụng 2 (giả lập) -->
+                <a href="#" class="app-item" style="pointer-events: none; opacity: 0.7;">
+                    <div class="app-info">
+                        <div class="app-icon"><i class="fas fa-code"></i></div>
+                        <div>
+                            <div class="app-name">Code Editor</div>
+                            <div class="app-desc">Lập trình &amp; sửa lỗi</div>
+                        </div>
+                    </div>
+                    <div class="app-arrow"><i class="fas fa-chevron-right"></i></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Nút OneDrive chính - khi bấm sẽ mở link OneDrive của bạn -->
+        <div class="onedrive-btn-wrapper">
+            <a href="https://onedrive.live.com/?id=YOUR_FOLDER_ID&cid=YOUR_CID" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="onedrive-btn" 
+               id="onedriveLink">
+                <i class="fab fa-microsoft"></i>
+                <span>Mở kho ứng dụng</span>
+                <i class="fas fa-arrow-right" style="font-size: 18px;"></i>
+            </a>
+            <p style="margin-top: 14px; font-size: 14px; color: #4a6a8a; opacity: 0.6;">
+                <i class="fas fa-lock" style="margin-right: 6px;"></i>
+                Được lưu trữ an toàn trên OneDrive
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>© 2026 Kho ứng dụng</span>
+            <a href="#" onclick="event.preventDefault(); alert('Liên hệ: support@khoapp.com');"><i class="far fa-envelope"></i> Hỗ trợ</a>
+            <a href="#" onclick="event.preventDefault(); alert('Bản quyền thuộc về tôi.');"><i class="far fa-copyright"></i> Giấy phép</a>
+        </div>
+    </div>
+
+    <!-- Script nhẹ để xử lý sự kiện (có thể thay đổi link OneDrive ở đây) -->
+    <script>
+        (function() {
+            // *** QUAN TRỌNG: Thay link OneDrive của bạn vào đây ***
+            const ONEDRIVE_URL = 'https://onedrive.live.com/?id=YOUR_FOLDER_ID&cid=YOUR_CID';
+            // Ví dụ: 'https://onedrive.live.com/?id=123456&cid=abcdef'
+
+            const linkElement = document.getElementById('onedriveLink');
+            if (linkElement) {
+                linkElement.href = ONEDRIVE_URL;
+            }
+
+            // Thêm hiệu ứng nhấp nháy nhẹ cho nút (optional)
+            console.log('🚀 Kho ứng dụng đã sẵn sàng!');
+        })();
+    </script>
+
+</body>
 </html>
